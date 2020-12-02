@@ -1,0 +1,38 @@
+<div *ngIf="!beverages">...Loading</div>
+
+<div *ngIf="beverages" class="row">
+  <div class="col-12">
+    <p>This is a drinking machine. Please, select your beverage.</p>
+
+    <div class="row">
+      <div class="col-12 col-md-8 col-lg-6 mx-auto">
+        <div *ngFor="let beverage of beverages" class="beverage-container">
+          {{beverage.description}}
+          <div class="col-xs-12">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectedBeverageModal"
+                    (click)="selectBeverage(beverage.enum)">Select
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #selectedBeverageModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Steps of preparation of {{selectedBeverage?.description}}</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>We are preparing your drink</p>
+    <ul>
+      <li *ngFor="let step of stepsOfPreparation">{{step}}</li>
+    </ul>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" aria-label="Close" (click)="modal.close()">Close</button>
+  </div>
+</ng-template>
